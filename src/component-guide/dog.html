@@ -5,6 +5,62 @@
     <title>Dog Component</title>
         <link rel="stylesheet" href="style.css">
         <script src="../lib/snap.svg-min.js"></script>
+    <script>
+        window.onload = function () {
+            var dog = Snap.select("#dog"),
+                    muzzle = dog.select("#muzzle"),
+                    jaw = dog.select("#lowerJaw"),
+                    timer;
+
+            var pivots = [
+                [44, 147],
+                [92, 126]
+            ];
+
+            function close() {
+                clearTimeout(timer);
+
+                muzzle.animate({
+                    transform: "r" + [8, pivots[0]]
+                }, 500, mina.backin);
+
+                jaw.animate({
+                    transform: "r" + [37, pivots[1]]
+                }, 500, mina.backin);
+
+                timer = setTimeout(function () {
+                    symbol.animate({
+                        transform: "t-70,40r40"
+                    }, 100);
+                }, 400);
+            }
+
+            function open() {
+                clearTimeout(timer);
+
+                muzzle.animate({
+                    transform: "r" + [0, pivots[0]]
+                }, 700, mina.elastic);
+
+                jaw.animate({
+                    transform: "r" + [0, pivots[1]]
+                }, 700, mina.elastic);
+
+                symbol.animate({
+                    transform: "t0,0r0"
+                }, 500, mina.elastic);
+            }
+
+            timer = setTimeout(close, 50);
+
+                dog.hover(open,
+                        function () {
+                            timer = setTimeout(close, 200);
+                        }
+                );
+
+            };
+    </script>
 </head>
 <body>
 
@@ -21,7 +77,7 @@
         width="84.270599mm"
         height="139.52475mm"
         viewBox="0 0 298.59661 494.37903"
-        id="svg2"
+        id="dog"
         version="1.1"
         inkscape:version="0.91 r13725">
     <defs
@@ -92,7 +148,7 @@
     </metadata>
     <g
             inkscape:groupmode="layer"
-            id="layer3"
+            id="lowerJaw"
             inkscape:label="Lowerjaw"
             transform="translate(-201.32094,-144.38806)">
         <g
@@ -112,8 +168,8 @@
     </g>
     <g
             inkscape:label="Muzzle"
-            inkscape:groupmode="layer"
-            id="layer1"
+            inkscape:groupmode="muzzle"
+            id="muzzle"
             transform="translate(-201.32094,-144.38806)">
         <g
                 id="g5680">
@@ -148,7 +204,7 @@
     </g>
     <g
             inkscape:groupmode="layer"
-            id="layer2"
+            id="ears"
             inkscape:label="Ears"
             transform="translate(-201.32094,-144.38806)">
         <path
@@ -164,7 +220,7 @@
     </g>
     <g
             inkscape:groupmode="layer"
-            id="layer4"
+            id="pupils"
             inkscape:label="Pupils"
             transform="translate(-201.32094,-144.38806)">
         <ellipse
